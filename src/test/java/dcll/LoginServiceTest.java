@@ -57,7 +57,7 @@ public class LoginServiceTest {
     List<String> i3 = l.findAllLoginsStartingWith("Paule");
     assertTrue("La liste des logins doit contenir 1 éléments", i3.size()==1);
     List<String> i0 = l.findAllLoginsStartingWith("Cake");
-    assertTrue("La liste des logins doit contenir 0 éléments", i3.size()==0);
+    assertTrue("La liste des logins doit contenir 0 éléments", i0.size()==0);
 
   }
 
