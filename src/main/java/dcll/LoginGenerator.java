@@ -1,12 +1,17 @@
 package dcll;
 
 import java.text.Normalizer;
+import java.util.List;
 import java.util.regex.Pattern;
 
 /**
  * Classe representant un generateur de login.
  */
 public class LoginGenerator {
+  /**
+   * constante trois.
+   */
+  private static int TROIS = 3;
   /**
    * l'object permettant le login.
    */
@@ -21,7 +26,7 @@ public class LoginGenerator {
     }
 
     /**
-     * Genere un login unique a
+     * Genere un login unique a.
      * partir d'un nom et d'un prenom
      * en prenant la premiere lettre
      * du prenom, concatenee avec
@@ -44,10 +49,16 @@ public class LoginGenerator {
      */
     public String generateLoginForNomAndPrenom(String nom, String prenom) {
         String p = deAccent(prenom.substring(0, 1).toUpperCase());
-        String n = deAccent(nom.substring(0, 3).toUpperCase());
+        int size = nom.length();
+        if (size > TROIS) {
+          size = TROIS;
+        }
+        String n = deAccent(nom.substring(0, size).toUpperCase());
         String login = p + n;
         if (loginService.loginExists(login)) {
-            login = login + "1";
+              List<String> l =  loginService.findAllLoginsStartingWith(login);
+              int increm = l.size();
+            login = login + increm;
         }
         loginService.addLogin(login);
         return login;
@@ -56,8 +67,8 @@ public class LoginGenerator {
     /**
      * Supprime les accents d'une chaine de caractere.
      *
-     * @param str la chaine de caractere
-     * @return la chaine de caractere sans accents
+     * @param str la chaine de caractere.
+     * @return la chaine de caractere sans accents.
      */
     private String deAccent(String str) {
         String nfdNormalizedString = Normalizer.

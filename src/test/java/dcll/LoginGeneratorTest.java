@@ -32,4 +32,20 @@ public class LoginGeneratorTest {
 
   }
 
+  @Test
+  public void d() throws Exception {
+
+    String s3 = g.generateLoginForNomAndPrenom("Du","Paul");
+    assertTrue("Le login doit être PDU",s3.equals("PDU"));
+
+  }
+
+  @Test
+  public void e() throws Exception {
+
+    String s3 = g.generateLoginForNomAndPrenom("Ralling","John");
+    assertTrue("Le login doit être JRAL2",s3.equals("JRAL2"));
+
+  }
+
 }
